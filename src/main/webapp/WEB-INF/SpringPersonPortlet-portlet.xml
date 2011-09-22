@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="viewController" class="com.sungardhe.luminis.portlets.SpringPersonPortlet.controller.ViewController">
+	<bean id="viewController" class="com.sungardhe.luminis.portlets.examples.SpringPersonPortlet.controller.ViewController">
 		<property name="message" value="Hello I am a message"/>
 		<property name="portalPersonDAO" ref="portalPersonObject" />
 	</bean>
