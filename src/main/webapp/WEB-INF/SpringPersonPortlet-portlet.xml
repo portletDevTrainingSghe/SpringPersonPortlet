@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="viewController" class="com.sungardhe.luminis.portlets.SpringPersonPortlet.controller.ViewController">
+		<property name="message" value="Hello I am a message"/>
+		<property name="portalPersonDAO" ref="portalPersonObject" />
+	</bean>
+	
+	<bean id="portletModeHandlerMapping" class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">
+		<property name="defaultHandler" ref="viewController"/>
+                	
+        <property name="portletModeMap">
+        	<map>
+	            <entry key="view">
+	            	<ref bean="viewController"/>
+	            </entry>
+	            
+             </map>
+        </property> 
+	</bean>
+	
+	<bean id="portalPersonObject" class="com.sungardhe.luminis.portlets.examples.SpringPersonPortlet.model.JdbcPortalPersonDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${driver.class}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${user}" />
+		<property name="password" value="${password}" />
+		
+		<property name="initialPoolSize" value="${initial.pool.size}" />
+        <property name="minPoolSize" value="${min.pool.size}" />
+        <property name="maxPoolSize" value="${max.pool.size}" />
+        <property name="acquireIncrement" value="${acquire.incremement}" />
+	</bean>
+	
+</beans>
